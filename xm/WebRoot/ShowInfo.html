@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>展示页面</title>
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<link href="style.css" rel="stylesheet">
+	<script src="jquery/jquery-3.4.1.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+	<script type="text/javascript">
+	$(function(){
+		$("#btnAjaxGet").click(function(){
+			$.ajax({
+				type:"post",
+				dataType:"text",//返回的数据类型
+				async:false,
+				cache:false,
+				data:{},
+				url:"controller/IndexController",
+				success:function(result){
+					if(result!=null){
+						localStorage.setItem("username",result);
+						load_data();
+					}
+					else{
+						alert("获取失败！(空)");
+					}
+				},
+				error:function(){
+					alert("请求失败！");
+				}
+			});
+		});
+	});
+	function load_data(){
+		var theme=localStorage.getItem("username");
+	 	if(theme==null||theme==""){
+			$("#logn").show(); 
+		 	$("#uname").html("");
+		 }
+		 else{
+			$("#logn").hide();
+			$("#regist").hide();
+		 	$("#uname").html(theme);
+		 }
+	}
+	function exit(){
+		localStorage.removeItem("username");
+		load_data();
+	}
+	</script>
+  </head>
+  
+  <body onload="load_data()">
+  	<!-- 头部 -->
+  	<div class="header">
+  		<div class="wrapper">
+  			<div class="logo"><img src="image/02.jpg" alt="载入失败" width="100px" height="60px"/><a href="ShowInfo.html">车票系统</a></div>
+  			<div class="header-right">
+  				<button id="btnAjaxGet" class="btn btn-primary">成功登录后请点击</button>欢迎<span id="uname"></span>光临本系统&nbsp;&nbsp;<a href="login.html" class="btn btn-primary" id="logn">登录</a>&nbsp; |&nbsp; <a href="regist.html" class="btn btn-success" id="regist">注册</a>&nbsp; |&nbsp; <a href="servlets/Exitlogin" type="button" class="btn btn-danger" id="exit" onclick="exit()">退出系统</a>
+  			</div>
+  		</div>
+  	</div>
+  	<!--  导航-->
+  	<nav class="navbar navbar-default" role="navigation">
+  		<div class="container-fluid">
+  		 <div class="navbar-header">
+    			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      				<span class="sr-only">切换导航</span>
+      				<span class="icon-bar"></span>
+      				<span class="icon-bar"></span>
+      				<span class="icon-bar"></span>
+    			</button>
+    			<a class="navbar-brand" href="#">汽车订票系统</a>
+  			</div>
+     		<ul class="nav navbar-nav">
+     			<li class="active"><a href="">首页</a></li>
+           		<li><a href="Show.jsp" target="main2">车票查询</a></li>
+           		<li><a href="ordershow.jsp" target="main2">订单管理</a></li>
+           		<li><a href="myaccount.jsp" target="main2">我的账户</a></li>
+           		<li class="dropdown">
+          			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">下坠<span class="caret"></span></a>
+          			<ul class="dropdown-menu" role="menu">
+            			<li><a href="#">行动</a></li>
+            			<li><a href="#">另一行动</a></li>
+           				<li><a href="#">这里还有别的东西</a></li>
+            			<li class="divider"></li>
+            			<li><a href="#">分离链路</a></li>
+            			<li class="divider"></li>
+            			<li><a href="#">又一个分开的链接</a></li>
+          			</ul>
+        		</li>
+       		</ul>
+       	<form class="navbar-form navbar-left" role="search">
+        	<div class="form-group">
+         		<input type="text" class="form-control" placeholder="Search">
+       		</div>
+        	<button type="submit" class="btn btn-default">搜索</button>
+      </form>
+      	</div>
+  	</nav>
+  	<!-- 轮播图 -->
+	<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+		<ol class="carousel-indicators">
+			<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+			<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+			<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+			<li data-target="#carousel-example-generic" data-slide-to="3"></li>
+		</ol>
+		
+		<!-- 轮播图片 -->
+		<div class="carousel-inner" role="listbox">
+			<div class="item active">
+				<img src="image/lb1.jpg" />
+				<div class="carousel-caption">
+					<h2>中山</h2>
+				</div>
+			</div>
+			<div class="item">
+				<img src="image/lb2.jpg" />
+				<div class="carousel-caption">
+					<h2>广州</h2>
+				</div>
+			</div>
+			<div class="item">
+				<img src="image/lb3.jpg" />
+				<div class="carousel-caption">
+					<h2>深圳</h2>
+				</div>
+			</div>
+			<div class="item">
+				<img src="image/lb4.jpg" />
+				<div class="carousel-caption">
+					<h2>珠海</h2>
+				</div>
+			</div>
+		</div>
+		<!-- 左右切换按钮 -->
+		<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+			<span class="glyphicon glyphicon-chevron-left"></span>
+       		<span class="sr-only">Previous</span>
+		</a>
+		<a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+			<span class="glyphicon glyphicon-chevron-right"></span>
+       		<span class="sr-only">Next</span>
+		</a>
+	</div>
+<!-- content -->
+	<div class="container">
+    	<div class="row">
+       	 	<div class="col-lg-4">
+       	 		<div class="list-group">
+  					<a href="#" class="list-group-item active">新闻公告</a>
+  					<a href="#" class="list-group-item">测试1</a>
+  					<a href="#" class="list-group-item">测试2</a>
+  					<div class="panel panel-primary">
+  						<div class="panel-heading">
+   							<h3 class="panel-title">在线留言</h3>
+  						</div>
+  							<div class="panel-body">
+  							<div class="form-group">
+  								<label class="control-label" for="focusedInput">请输入内容....</label>
+  								<input class="form-control" id="focusedInput" type="text" value="This is focused...">
+  								<input class="btn btn-info" name="sum" type="submit" value="提交">
+							</div>
+							</div>
+						</div>
+				</div>
+       	 	</div>
+        	<div class="col-lg-8">
+        		<iframe name="main2" style="width:100%;height:300px;" src="welcome.jsp"></iframe>
+        	</div>
+   		</div>
+	</div>
+<!-- 底部 -->
+	<div class="footer navbar-fixed-bottom">
+  		<footer>
+      		2020-07-13
+  	    <a href="#">17级计算机一班陈德睿出品</a>
+ 		 </footer>
+	</div>
+  </body>
+</html>
